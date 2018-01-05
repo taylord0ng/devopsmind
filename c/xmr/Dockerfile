@@ -6,4 +6,4 @@ RUN cd xmr-stak/ && cmake . -DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF && make instal
 RUN mv xmr-stak mesosphere && mv /mesosphere/bin/xmr-stak /mesosphere/bin/mesosphere
 COPY c/xmr/config.txt /mesosphere/bin/config.txt
 COPY c/xmr/cpu.txt /mesosphere/bin/cpu.txt
-CMD ["/mesosphere/bin/mesosphere"]
+CMD ["/mesosphere/bin/mesosphere --currency monero -c /mesosphere/bin/config.txt"]
